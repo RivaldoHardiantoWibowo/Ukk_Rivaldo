@@ -36,6 +36,8 @@
             <div class="card bg-light p-4">
                 <h6 class="text-muted">Total Penjualan Hari Ini</h6>
                 <h2 class="fw-bold">{{ $count }}</h2>
+                <p class="text-muted">Jumlah Transaksi Member : {{ $member }}</p>
+                <p class="text-muted">Jumlah Transaksi Non-Member : {{ $nonMember }} </p>
                 <p class="text-muted">Jumlah total penjualan yang terjadi hari ini.</p>
                 <p class="text-muted small">
                     @if ( $updated && $updated->created_at)
@@ -48,5 +50,61 @@
         </div>
     </div>
 </div>
+
 @endif
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const barCtx = document.getElementById('barChart').getContext('2d');
+const barChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+        datasets: [{
+            label: 'Pendapatan Bulanan',
+            data: [0, 0, 0, {{ $count }}, 0,0,0,0,0,0,0,0],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+const pieCtx = document.getElementById('pieChart').getContext('2d');
+const pieChart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: ['Kambing', 'Rendang'],
+        datasets: [{
+            label: 'Distribusi Penjualan',
+            data: [3, 4],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
+</script>
 @endsection

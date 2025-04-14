@@ -138,6 +138,8 @@ class UserController extends Controller
         $count = $transaction->count();
 
         $updated = Transaction::orderBy('created_at', 'asc')->first();
-        return view('dashboard', compact('count','updated'));
+        $member = Transaction::whereNotNull('member_id')->count();
+        $nonMember = Transaction::where('member_id', null)->count();
+        return view('dashboard', compact('count','updated', 'transaction','member','nonMember'));
     }
 }

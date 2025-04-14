@@ -79,7 +79,7 @@
                 <td>{{ $item->product->name }}</td>
                 <td>Rp.{{ $item->product->price }}</td>
                 <td>{{ $item->qty }}</td>
-                <td>Rp.{{ $transaction->total_price }}</td>
+                <td>Rp.{{ $item->product->price }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -94,7 +94,7 @@
             </tr>
             <tr>
                 <th colspan="3">Kembalian</th>
-                <td>Rp.{{ $transaction->total_price }}</td>
+                <td>Rp.{{ $transaction->total_return }}</td>
             </tr>
             <tr>
                 <th colspan="3">Total</th>

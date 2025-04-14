@@ -82,7 +82,6 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        dd($request->all());
         if ($request->hasFile('image')) {
             if ($product->image) {
                 Storage::delete('public/'. $product->image);
@@ -95,7 +94,7 @@ class ProductController extends Controller
 
         $product->update($validated);
 
-        return redirect()->back()->with('success', 'Data berhasil diubah');
+        return redirect()->route('products.index')->with('success', 'Data berhasil diubah');
     }
 
     public function updateStock (Request $request, string $id) {

@@ -76,7 +76,7 @@
         </tbody>
     </table>
 
-    <div class="d-flex justify-content-between align-items-center">
+    {{-- <div class="d-flex justify-content-between align-items-center">
         <div>
             Menampilkan 1 hingga 10 dari 100 entri
         </div>
@@ -91,7 +91,7 @@
                 </ul>
             </nav>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @foreach ($transaction as $item)

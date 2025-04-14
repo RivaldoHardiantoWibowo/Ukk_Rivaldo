@@ -23,6 +23,17 @@ class TransactionController extends Controller
         return view('pembelian.index', compact('transaction'));
     }
 
+    public function search(Request $request) {
+        $search = Transaction::where('member_id', $request->search)->first();
+
+        if ($search == null) {
+            $search = Transaction::where('user_id', $request->search)->first();
+        }
+
+        return view('pembelian.index', compact('search'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -30,10 +41,6 @@ class TransactionController extends Controller
     {
         $products = Product::all();
         return view('pembelian.tambah', compact('products'));
-    }
-
-    public function search(Request $request) {
-        
     }
 
     public function cart(Request $request) {
@@ -170,7 +177,8 @@ class TransactionController extends Controller
             'totalPrice' => $totalPrice,
             'userName' => $userName,
             'kembalian' => $kembalian,
-            'invoiceNumber' => $invoiceNumber
+            'invoiceNumber' => $invoiceNumber,
+            'poinUsed' => 0
         ]);
     }
 
